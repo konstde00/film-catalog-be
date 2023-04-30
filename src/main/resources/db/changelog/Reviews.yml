@@ -1,0 +1,48 @@
+databaseChangeLog:
+  -  preConditions:
+
+  -  changeSet:
+       id:  createReviewsTable
+       author:  konstde00
+       changes:
+         -  createTable:
+              columns:
+                - column:
+                    name: id
+                    type: bigint
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+                - column:
+                    name: creator_id
+                    type: bigint
+                    constraints:
+                      nullable: false
+                - column:
+                    name: film_id
+                    type: bigint
+                    constraints:
+                      nullable: false
+                - column:
+                    name: rating
+                    type: varchar
+                - column:
+                    name: comment
+                    type: varchar
+                - column:
+                    name: created_at
+                    type: timestamp
+                - column:
+                    name: updated_at
+                    type: timestamp
+              tableName: reviews
+
+  - changeSet:
+      id: createReviewsIdSequence
+      author: konstde00
+      changes:
+        - createSequence:
+            type: bigint
+            minValue: 1
+            incrementBy: 1
+            sequenceName: reviews_id_seq

@@ -1,0 +1,46 @@
+databaseChangeLog:
+  -  preConditions:
+
+  -  changeSet:
+       id:  createCollectionsTable
+       author:  konstde00
+       changes:
+         -  createTable:
+              columns:
+                - column:
+                    name: id
+                    type: bigint
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+                - column:
+                    name: film_id
+                    type: bigint
+                    constraints:
+                      nullable: false
+                - column:
+                    name: collection_id
+                    type: bigint
+                    constraints:
+                      nullable: false
+              tableName: films_collections
+
+  - changeSet:
+      id: createFilmsCollectionsIdSequence
+      author: konstde00
+      changes:
+        - createSequence:
+            type: bigint
+            minValue: 1
+            incrementBy: 1
+            sequenceName: films_collections_id_seq
+
+  - changeSet:
+      id: filmsCollectionsChangeIdTypeToBigserial
+      author: konstde00
+      changes:
+        - modifyDataType:
+            columnName: id
+            newDataType: serial
+            schemaName: public
+            tableName: films_collections

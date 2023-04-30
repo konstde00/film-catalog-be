@@ -1,0 +1,16 @@
+databaseChangeLog:
+  -  preConditions:
+
+  - changeSet:
+      id: filmsAddForeignKeyOnCreatedBy
+      author: konstde00
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: created_by
+            baseTableName: films
+            constraintName: films_users_FK
+            onDelete: CASCADE
+            onUpdate: CASCADE
+            referencedColumnNames: id
+            referencedTableName: users
+            validate: true

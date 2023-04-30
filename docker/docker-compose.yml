@@ -1,0 +1,39 @@
+version: '3.5'
+
+services:
+  postgres-film-catalog:
+    container_name: postgres-film-catalog
+    image: postgres:14.1-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=very_very_secure_password
+      - POSTGRES_USER=film-catalog
+      - POSTGRES_DB=film-catalog
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    networks:
+      - film-catalog
+    ports:
+      - "127.0.0.1:5432:5432"
+  film-catalog:
+    container_name: film-catalog
+    image: konstde00/filmcatalog:latest
+    restart: unless-stopped
+    volumes:
+      - ./logs:/logs
+    networks:
+      - film-catalog
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=dev"
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/film-catalog
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://postgres:5432/film-catalog
+    depends_on:
+      - postgres-film-catalog
+
+volumes:
+  postgres:
+
+networks:
+  film-catalog:
+    driver: bridge

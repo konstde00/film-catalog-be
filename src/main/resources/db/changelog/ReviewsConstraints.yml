@@ -1,0 +1,30 @@
+databaseChangeLog:
+  -  preConditions:
+
+  - changeSet:
+      id: reviewsAddForeignKeyOnCreatorId
+      author: konstde00
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: creator_id
+            baseTableName: reviews
+            constraintName: reviews_users_FK
+            onDelete: CASCADE
+            onUpdate: CASCADE
+            referencedColumnNames: id
+            referencedTableName: users
+            validate: true
+
+  - changeSet:
+      id: reviewsAddForeignKeyOnFilmId
+      author: konstde00
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: film_id
+            baseTableName: reviews
+            constraintName: reviews_films_FK
+            onDelete: CASCADE
+            onUpdate: CASCADE
+            referencedColumnNames: id
+            referencedTableName: films
+            validate: true

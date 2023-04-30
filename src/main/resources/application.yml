@@ -1,0 +1,63 @@
+spring:
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/film-catalog}
+    username: ${DATASOURCE_USERNAME:film-catalog}
+    password: ${DATASOURCE_PASSWORD:very_very_secure_password}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  liquibase:
+    change-log: classpath:db/db.changelog-master.yml
+    user: ${DATASOURCE_USERNAME:film-catalog}
+    password: ${DATASOURCE_PASSWORD:very_very_secure_password}
+    default-schema: public
+    driver-class-name: org.postgresql.Driver
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/film-catalog}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: alpha
+    disable-swagger-default-url: true
+  api-docs:
+    path: /docs
+
+jwt:
+  secret: ${JWT_SECRET:very_very_very_very_very_very_very_very_very_very_very_very_very_very_very_very_very_very_strong_secret}
+
+s3:
+  access-key: ${AWS_ACCESS_KEY:test}
+  secret-key: ${AWS_SECRET_KEY:test}
+  service-endpoint: s3.us-east-1.amazonaws.com
+  signing-region: us-east-1
+  bucket-name: ${BUCKET_NAME:filmcatalog}
+  folders:
+    avatars: avatars
+
+token:
+  expiration:
+    time:
+      ms: 600000000
+  refresh:
+    expiration:
+      time:
+        ms: 2592000000000
+
+aws:
+  region: us-east-1
+  s3:
+    bucket: ${BUCKET_NAME:filmcatalog}
+    endpoint: s3.us-east-1.amazonaws.com
+    folders:
+      avatars: avatars
+      films: films
+
+cloud:
+  aws:
+    region:
+      static: us-east-1
+
+email-sender-address: konstde00@gmail.com

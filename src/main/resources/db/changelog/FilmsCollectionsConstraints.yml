@@ -1,0 +1,30 @@
+databaseChangeLog:
+  -  preConditions:
+
+  - changeSet:
+      id: collectionsAddForeignKeyOnFilmId
+      author: konstde00
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: film_id
+            baseTableName: films_collections
+            constraintName: films_collections_films_FK
+            onDelete: CASCADE
+            onUpdate: CASCADE
+            referencedColumnNames: id
+            referencedTableName: films
+            validate: true
+
+  - changeSet:
+      id: collectionsAddForeignKeyOnCollectionId
+      author: konstde00
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: collection_id
+            baseTableName: films_collections
+            constraintName: films_collections_collections_FK
+            onDelete: CASCADE
+            onUpdate: CASCADE
+            referencedColumnNames: id
+            referencedTableName: collections
+            validate: true
