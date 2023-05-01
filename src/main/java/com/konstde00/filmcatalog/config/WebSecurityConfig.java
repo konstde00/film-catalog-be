@@ -28,9 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${jwt.secret}")
     private String jwtSecret;
-
     private final UserService userService;
-
     public WebSecurityConfig(UserService userService) {
         this.userService = userService;
     }
@@ -46,7 +44,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(OPTIONS, "/**").permitAll()
                 // UserController
-//                .antMatchers("/api/**").permitAll()
                 .antMatchers("api/users/v1/password/recovery").permitAll()
                 .antMatchers(POST, "/api/users/v1/registration/**").permitAll()
                 .antMatchers(POST, "/api/users/v1/check/username").permitAll()

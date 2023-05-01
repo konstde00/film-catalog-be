@@ -19,6 +19,7 @@ import com.konstde00.filmcatalog.model.exception.ResourceNotFoundException;
 import com.konstde00.filmcatalog.repository.ConfirmationCodeRepository;
 import com.konstde00.filmcatalog.repository.UserRepository;
 import com.konstde00.filmcatalog.util.DateUtil;
+import com.konstde00.filmcatalog.util.PasswordValidator;
 import com.konstde00.filmcatalog.util.SecureRandomUtil;
 import io.jsonwebtoken.Jwts;
 import lombok.AccessLevel;
@@ -34,11 +35,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static com.konstde00.filmcatalog.model.enums.TokenType.ACCESS;
 import static com.konstde00.filmcatalog.model.enums.UserRegistrationType.*;
@@ -49,7 +48,6 @@ import static java.lang.String.format;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserService {
-
 
     final UserMapper userMapper;
     final TokenService tokenService;
@@ -131,6 +129,12 @@ public class UserService {
     public JwtDto registrationByEmail(RegistrationByEmailDto registrationDto) {
 
         log.info("'registrationByEmail' invoked with params - {}", registrationDto);
+
+        var isValidPassword = PasswordValidator.isValid(registrationDto.getPassword());
+        if (!isValidPassword) {
+            log.warn("Password is not valid");
+            throw new NotValidException("Password is not valid");
+        }
 
         var user = createNew(registrationDto.getEmail(), registrationDto.getPassword(),
                 registrationDto.getName(), registrationDto.getUsername(), EMAIL_AND_PASSWORD);

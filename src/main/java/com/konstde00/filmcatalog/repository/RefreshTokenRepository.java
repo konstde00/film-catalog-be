@@ -22,7 +22,4 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Long
 
     @Transactional
     void deleteByUserIdAndId(Long userId, Long tokenId);
-
-    @Transactional
-    void deleteAllByExpiredAtBefore(LocalDateTime dateTime);
 }
