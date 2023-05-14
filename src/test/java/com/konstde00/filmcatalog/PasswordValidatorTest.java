@@ -1,10 +1,9 @@
 package com.konstde00.filmcatalog;
 
+import com.konstde00.filmcatalog.model.exception.NotValidException;
 import com.konstde00.filmcatalog.util.PasswordValidator;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PasswordValidatorTest {
@@ -12,31 +11,60 @@ public class PasswordValidatorTest {
     @Test
     public void testValidPassword() {
         String password = "myPassword123";
-        assertTrue(PasswordValidator.isValid(password));
+        assertDoesNotThrow(() -> PasswordValidator.validatePassword(password));
     }
 
     @Test
     public void testInvalidPasswordTooShort() {
         String password = "short1";
-        assertFalse(PasswordValidator.isValid(password));
+
+        Exception exception = assertThrows(NotValidException.class, () -> {
+            PasswordValidator.validatePassword(password);
+        });
+
+        String expectedMessage = "Password is not valid";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
     public void testInvalidPasswordNoLetter() {
         String password = "123456789";
-        assertFalse(PasswordValidator.isValid(password));
+        Exception exception = assertThrows(NotValidException.class, () -> {
+            PasswordValidator.validatePassword(password);
+        });
+
+        String expectedMessage = "Password is not valid";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
     public void testInvalidPasswordNoDigit() {
         String password = "abcdefghi";
-        assertFalse(PasswordValidator.isValid(password));
+        Exception exception = assertThrows(NotValidException.class, () -> {
+            PasswordValidator.validatePassword(password);
+        });
+
+        String expectedMessage = "Password is not valid";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
     public void testInvalidPasswordNoLetterOrDigit() {
         String password = "!@#$%^&*";
-        assertFalse(PasswordValidator.isValid(password));
+        Exception exception = assertThrows(NotValidException.class, () -> {
+            PasswordValidator.validatePassword(password);
+        });
+
+        String expectedMessage = "Password is not valid";
+        String actualMessage = exception.getMessage();
+
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 }
 

@@ -32,7 +32,8 @@ public class CollectionController {
     @GetMapping("/v1")
     @Operation(summary = "Get list of collections")
     public ResponseEntity<PageableCollectionsDto> getCollections(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
-                                                                 @RequestParam(value = "itemsOnPage", required = false, defaultValue = "10") Integer itemsOnPage) {
+                                                                 @RequestParam(value = "itemsOnPage", required = false, defaultValue = "10") Integer itemsOnPage,
+                                                                 HttpServletRequest request) {
 
         var collections = collectionService.getAll(pageNumber, itemsOnPage);
 

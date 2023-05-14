@@ -130,11 +130,7 @@ public class UserService {
 
         log.info("'registrationByEmail' invoked with params - {}", registrationDto);
 
-        var isValidPassword = PasswordValidator.isValid(registrationDto.getPassword());
-        if (!isValidPassword) {
-            log.warn("Password is not valid");
-            throw new NotValidException("Password is not valid");
-        }
+        PasswordValidator.validatePassword(registrationDto.getPassword());
 
         var user = createNew(registrationDto.getEmail(), registrationDto.getPassword(),
                 registrationDto.getName(), registrationDto.getUsername(), EMAIL_AND_PASSWORD);
