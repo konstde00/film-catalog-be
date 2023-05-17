@@ -36,6 +36,7 @@ public class CollectionMapper {
                 .id(collection.getId())
                 .name(collection.getName())
                 .description(collection.getDescription())
+                .films(FilmMapper.toPageableItemList(collection.getFilms()))
                 .photoUrl("https://filmcatalog.s3.amazonaws.com/collections/" + collection.getId() + "/photo")
                 .lastUpdate(Objects.requireNonNullElse(collection.getUpdatedAt(),
                         collection.getCreatedAt()))

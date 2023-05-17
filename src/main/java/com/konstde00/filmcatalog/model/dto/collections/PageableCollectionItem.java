@@ -24,5 +24,6 @@ public class PageableCollectionItem {
     String name;
     String description;
     String photoUrl;
+    List<PageableFilmItem> films;
     LocalDateTime lastUpdate;
 }
