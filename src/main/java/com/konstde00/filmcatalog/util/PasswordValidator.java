@@ -16,7 +16,7 @@ public class PasswordValidator {
 
         var isValidPassword = PASSWORD_PATTERN.matcher(password).matches();
         if (!isValidPassword) {
-            throw new NotValidException("Password is not valid");
+            throw new NotValidException("Password is not valid. Has to be at least 8 characters long, contain numbers and characters");
         }
     }
 }

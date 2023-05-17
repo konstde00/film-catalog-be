@@ -22,7 +22,7 @@ public class PasswordValidatorTest {
             PasswordValidator.validatePassword(password);
         });
 
-        String expectedMessage = "Password is not valid";
+        String expectedMessage = "Password is not valid. Has to be at least 8 characters long, contain numbers and characters";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
@@ -35,7 +35,7 @@ public class PasswordValidatorTest {
             PasswordValidator.validatePassword(password);
         });
 
-        String expectedMessage = "Password is not valid";
+        String expectedMessage = "Password is not valid. Has to be at least 8 characters long, contain numbers and characters";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
@@ -48,7 +48,7 @@ public class PasswordValidatorTest {
             PasswordValidator.validatePassword(password);
         });
 
-        String expectedMessage = "Password is not valid";
+        String expectedMessage = "Password is not valid. Has to be at least 8 characters long, contain numbers and characters";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
@@ -61,7 +61,7 @@ public class PasswordValidatorTest {
             PasswordValidator.validatePassword(password);
         });
 
-        String expectedMessage = "Password is not valid";
+        String expectedMessage = "Password is not valid. Has to be at least 8 characters long, contain numbers and characters";
         String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));

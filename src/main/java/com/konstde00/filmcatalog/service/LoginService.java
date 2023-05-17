@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
-import static com.konstde00.filmcatalog.model.enums.BusinessLogicException.INCORRECT_EMAIL_OR_PASSWORD;
 import static com.konstde00.filmcatalog.model.enums.BusinessLogicException.WRONG_AUTHORIZATION_TYPE;
 import static lombok.AccessLevel.PRIVATE;
 
@@ -91,8 +90,7 @@ public class LoginService {
         var passwordValidation = BCrypt.checkpw(inputPassword, correctPassword);
 
         if (!passwordValidation) {
-            log.error("Password is incorrect.");
-            throw new NotValidException(INCORRECT_EMAIL_OR_PASSWORD.name());
+            throw new NotValidException("Incorrect email or password");
         }
     }
 }
