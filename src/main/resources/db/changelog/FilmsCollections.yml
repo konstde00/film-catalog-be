@@ -45,13 +45,13 @@ databaseChangeLog:
             schemaName: public
             tableName: films_collections
 
-  - changeSet:
-      id: filmsCollectionsAddIdDefaultValue
-      author: konstde00
-      changes:
-        - addDefaultValue:
-            columnDataType: serial
-            columnName: id
-            defaultValueSequenceNext: films_collections_id_seq
-            schemaName: public
-            tableName: films_collections
+#  - changeSet:
+#      id: filmsCollectionsAddIdDefaultValue
+#      author: konstde00
+#      changes:
+#        - addDefaultValue:
+#            columnDataType: serial
+#            columnName: id
+#            defaultValueSequenceNext: films_collections_id_seq
+#            schemaName: public
+#            tableName: films_collections

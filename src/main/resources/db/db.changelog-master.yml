@@ -28,6 +28,9 @@ databaseChangeLog:
   - include:
       file: changelog/FilmsCollections.yml
       relativeToChangelogFile: true
+  - include:
+        file: changelog/FilmsCollections.sql
+        relativeToChangelogFile: true
 
 
   #  Constraints

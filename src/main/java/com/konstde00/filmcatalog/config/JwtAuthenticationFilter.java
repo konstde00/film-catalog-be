@@ -52,8 +52,6 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
         var token = request.getHeader(AUTHORIZATION);
 
-        log.info("Authentication token: " + token);
-
         if (token != null && token.startsWith("Bearer ")) {
 
             try {
@@ -69,7 +67,7 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
                 var user = userService.getById(userId);
 
-                if (user.getIsBlocked()) {
+                if (user.getIsBlocked() != null && user.getIsBlocked()) {
                     throw new AccessDeniedException("User is blocked");
                 }
 
